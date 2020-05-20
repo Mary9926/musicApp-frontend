@@ -1,15 +1,10 @@
-.naiv-item{
-  marigin: 0;
-}
 .containerFoto {
   background-image: url(../images/background.png);
-  height: 100%;
   background-position: center;
   background-repeat: repeat;
   background-size: cover;
   color: white;
 }
-
 
 .textpalce {
   color: white;
@@ -17,7 +12,7 @@
   font-size: 60px;
 }
 
-.btn{
+.btn-purple {
   font-size: 20px;
   padding: 20px;
   margin-top: 15px;
@@ -32,17 +27,13 @@ a{
   text-decoration: none;
 }
 
-.btn:hover{
-  cursor: pointer;
-}
-
 .addBlock{
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
@@ -53,16 +44,14 @@ a{
 }
 .textError{
   font-size: 15px;
-}
-
-.nav-item{
-  margin: 0;
+  font-style: oblique;
 }
 
 .form-control{
   margin: 10px;
   padding: 5px;
 }
+
 .textSuccess{
   font-size: 30px;
   color: white;
@@ -71,6 +60,7 @@ a{
   align-items: center;
   padding: 50px;
 }
+
 .alert{
   display: flex;
   flex-direction: row;
@@ -79,14 +69,16 @@ a{
   align-items: center;
   padding: 50px;
 }
+
 .welcome{
   font-size: 30px;
-  color: #f13cc8;
+  color: #ea00e0;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 50px;
 }
+
 .textForSignup{
   font-size: 30px;
   color: #ec00dd;

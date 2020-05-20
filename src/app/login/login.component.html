@@ -1,13 +1,13 @@
 <div class="containerFoto">
-  <div class="welcome">  Welcome to Music App
-    <br>
-         Please log in ;)
-  </div>
     <div *ngIf="isLoggedIn; else loggedOut">
       Logged in as {{roles}}.
     </div>
     ​
     <ng-template #loggedOut>
+      <div class="welcome">  Welcome to Music App
+        <br>
+        Please log in ;)
+      </div>
       <div class="row col-sm-6 textpalce addBlock">
         <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
           <div class="form-group">
@@ -28,15 +28,15 @@
             </div>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary">Login</button>
-            <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
+            <button class="btn btn-purple">Login</button>
+            <div *ngIf="f.submitted && isLoginFailed" class="alert-danger p-2 mt-2 textError">
               Password or login are not correct, please try again
             </div>
           </div>
         </form>
         <hr />
         <p  class=" textForSignup" > Don't have an account?</p>
-        <a href="signup" class="btn">Sign Up</a>
+        <a href="signup" class="btn btn-purple">Sign Up</a>
       </div>
     </ng-template>
 </div>
