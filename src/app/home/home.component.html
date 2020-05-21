@@ -7,9 +7,9 @@
   </div>
 
   <div class="card-group justify-content-center">
-    <div *ngFor="let song of songs" class="card m-2" style="min-width: 400px; max-width: 600px;">
+    <div *ngFor="let song of songs" class="card m-2 border-0" style="min-width: 400px; max-width: 600px;">
       <div style="background-color: whitesmoke;">
-        <img class="card-img-top img-fluid" src="{{song.coverUrl}}" alt="Cover Shallow"/>
+        <div class="img-fluid img" style="background-image: url({{song.coverUrl}})"></div>
         <mat-basic-audio-player [audioUrl]="song.audioUrl" [title]="song.title + ' - ' + song.author" [autoPlay]="false" muted="muted"
                                 [displayTitle]="msbapDisplayTitle" [displayVolumeControls]="msbapDisplayVolumeControls" ></mat-basic-audio-player>
       </div>
