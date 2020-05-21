@@ -1,13 +1,51 @@
-<div *ngIf="info.token; else loggedOut">
-  <h5 class="text-primary">Your Information</h5>
-  <p>
-    <strong>Username:</strong> {{info.username}}<br/>
-    <strong>Roles:</strong> {{info.authorities}}<br />
-    <strong>Token:</strong> {{info.token}}.
-  </p>
-  <button class="btn btn-secondary" (click)="logout()">Logout</button>
+<div class="d-flex mt-4 justify-content-center">
+  <form class="form-inline md-form mb-4">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+    <button type="button" class="buttonCute btn btn-warning">Search</button>
+  </form>
 </div>
 
-<ng-template #loggedOut>
-</ng-template>
+<div class="card-group justify-content-center">
+  <div *ngFor="let song of songs" class="card m-2" style="min-width: 400px; max-width: 600px;">
+    <div style="background-color: whitesmoke;">
+      <img class="card-img-top img-fluid" src="{{song.coverUrl}}" alt="Cover Shallow"/>
+      <mat-basic-audio-player [audioUrl]="song.audioUrl" [title]="song.title + ' - ' + song.author" [autoPlay]="false" muted="muted"
+                            [displayTitle]="msbapDisplayTitle" [displayVolumeControls]="msbapDisplayVolumeControls" ></mat-basic-audio-player>
+    </div>
+  </div>
+</div>
+  <!--
+<div class=" col-xs-9 songs">
+  <div clas="header">
+    <div calss="total">TOTAL: 38 songs </div>
+    <nav>
+      <ul class="pagnitation">
+        <li> <a href="#" ><span aria-hidden="true">&laquo;</span></a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li> <a href="#" ><span aria-hidden="true">&laquo;</span> <span class="sr-only"> Next</span></a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="song">
+    <div>
+      <div audio-player song="Shallow" class="transportControl"><i class="fa fa-play-cicle-o"></i></div>
+      <div class="index">1.</div>
+      <div class="dongTitle">Song Title<div class="artist"> by Artist Name</div></div>
+      <div class="options">
+         <div class=dlLinks">
+           Download: <a>MP3</a> / <a>WAV</a>
+         </div>
+      </div>
+    </div>
+  </div>
+
+
+-->
+
+
+
 

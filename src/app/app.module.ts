@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import {RouterModule, Routes} from '@angular/router';
@@ -12,6 +11,7 @@ import { httpInterceptorProviders } from './auth/auth-interceptor';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   // basic routes
@@ -31,17 +31,17 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     UserComponent,
-    AdminComponent
+    AdminComponent,
+    SearchComponent
 
   ],
   imports: [
     BrowserModule,
-    // import HttpClientModule after BrowserModule.
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
-    //,
- //   NgbModule.forRoot()
+    RouterModule.forRoot(routes),
+    NgxAudioPlayerModule
+
   ],
 
   providers: [httpInterceptorProviders],
