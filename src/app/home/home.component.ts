@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TokenStorageService} from '../auth/token-storage.service';
+import {SongService} from '../services/song.service';
+import {SongModel} from '../model/song.model';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +10,12 @@ import {TokenStorageService} from '../auth/token-storage.service';
 })
 export class HomeComponent implements OnInit {
   info: any;
-  songs: any;
+  songs: SongModel[];
+  isLoggedIn = false;
 
   msbapDisplayTitle = true;
   msbapDisplayVolumeControls = true;
-  constructor(private token: TokenStorageService) { }
+  constructor(private token: TokenStorageService, private songService: SongService) { }
 
   ngOnInit(): void {
     this.info = {
@@ -20,23 +23,20 @@ export class HomeComponent implements OnInit {
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
-    this.songs = this.getSongs();
+    if (this.info.token){
+      this.isLoggedIn = true;
+      this.getSongs();
+    }
   }
   getSongs(){
-    return [
-      {
-        coverUrl: 'https://lastfm.freetls.fastly.net/i/u/770x0/00ac90084a3f8bc9dc37ebb6a96867bb.jpg',
-        author: 'Lady Gaga',
-        title: 'Shallow',
-        audioUrl: 'assets/songs/Shallow.mp3'
+    this.songService.getSongs().subscribe(
+      data => {
+        this.songs = data;
       },
-      {
-        coverUrl: 'https://lastfm.freetls.fastly.net/i/u/770x0/00ac90084a3f8bc9dc37ebb6a96867bb.jpg',
-        author: 'Lady Gaga',
-        title: 'Shallow',
-        audioUrl: 'assets/songs/Shallow.mp3'
+      error => {
+        console.log(`${error.status}: ${JSON.parse(error.error).message}`);
       }
-    ]
+    );
   }
   logout() {
     this.token.signOut();
