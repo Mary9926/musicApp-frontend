@@ -15,3 +15,7 @@
   background-position: center;
   background-size: cover;
 }
+
+.border-medium{
+  border-width: 5px !important;
+}

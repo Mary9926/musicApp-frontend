@@ -14,5 +14,8 @@ export class SongService {
   getSongs(): Observable<SongModel[]> {
     return this.http.get<SongModel[]>(this.songUrl);
   }
+ /* getSong(): Observable<SongModel[]> {
+    return this.http.get<SongModel[]>(this.title);
+  }*/
 
 }

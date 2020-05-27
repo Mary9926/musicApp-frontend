@@ -1,13 +1,12 @@
 <div *ngIf="isLoggedIn; else loggedOut">
-  <div class="d-flex mt-4 justify-content-center">
-    <form class="form-inline md-form mb-4">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button type="button" class="buttonCute btn btn-warning">Search</button>
-    </form>
+  <div class="d-flex mt-4 justify-content-center list">
+    <div class="form-inline md-form mb-4">
+      <input class="form-control mr-sm-2 border border-medium border-warning" type="text"  placeholder="Search" aria-label="Search" (input)="search($event)">
+    </div>
   </div>
 
   <div class="card-group justify-content-center">
-    <div *ngFor="let song of songs" class="card m-2 border-0" style="min-width: 400px; max-width: 600px;">
+    <div *ngFor="let song of songsFilter" class="card m-2 border-0" style="min-width: 400px; max-width: 600px;">
       <div style="background-color: whitesmoke;">
         <div class="img-fluid img" style="background-image: url({{song.coverUrl}})"></div>
         <mat-basic-audio-player [audioUrl]="song.audioUrl" [title]="song.title + ' - ' + song.author" [autoPlay]="false" muted="muted"
@@ -15,6 +14,21 @@
       </div>
     </div>
   </div>
+
+<!--  <input [(ngModel)]="searchText" placeholder="search text goes here">
+  <ul>
+    <li *ngFor="let songTitile of songs | filter : searchText">
+      {{songTitile}}
+    </li>
+  </ul>-->
+
+ <!-- <md-input #songs placeholder="Search for song ..." [(ngModel)]="title" (input)="filterSongs(songs.title)"></md-input>
+
+  <div *ngFor="let song of filterSongs">
+    {{song.title}}
+  </div>-->
+
+
 </div>
 
 <ng-template #loggedOut>

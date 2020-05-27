@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
 import { SearchComponent } from './search/search.component';
+import {MatListModule} from '@angular/material';
 
 const routes: Routes = [
   // basic routes
@@ -33,14 +34,14 @@ const routes: Routes = [
     UserComponent,
     AdminComponent,
     SearchComponent
-
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    NgxAudioPlayerModule
+    NgxAudioPlayerModule,
+    MatListModule
 
   ],
 

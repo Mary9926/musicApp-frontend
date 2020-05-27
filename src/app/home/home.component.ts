@@ -11,8 +11,8 @@ import {SongModel} from '../model/song.model';
 export class HomeComponent implements OnInit {
   info: any;
   songs: SongModel[];
+  songsFilter: SongModel[];
   isLoggedIn = false;
-
   msbapDisplayTitle = true;
   msbapDisplayVolumeControls = true;
   constructor(private token: TokenStorageService, private songService: SongService) { }
@@ -32,14 +32,18 @@ export class HomeComponent implements OnInit {
     this.songService.getSongs().subscribe(
       data => {
         this.songs = data;
+        this.songsFilter = data;
       },
       error => {
         console.log(`${error.status}: ${JSON.parse(error.error).message}`);
       }
     );
   }
-  logout() {
-    this.token.signOut();
-    window.location.reload();
+  search(event) {
+    let value = event.target.value.toLowerCase().split(' ').join('');
+    this.songsFilter = this.songs.filter((element) => {
+      return (element.title.toLowerCase().split(' ').join('').includes(value)
+        || element.author.toLowerCase().split(' ').join('').includes(value));
+    });
   }
 }
