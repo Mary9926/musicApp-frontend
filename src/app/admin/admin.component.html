@@ -1,3 +1,25 @@
-<h4>Content from Server</h4>
-{{board}}
-{{errorMessage}}
+<h4 style = "color: white; padding: 2px; text-align: center"> Your Admin Account</h4>
+<div>
+  <label>Song title:
+    <input #title />
+  </label>
+  <br>
+  <label>Song author:
+    <input #author />
+  </label>
+  <br>
+  <label>Song coverUrl:
+    <input #coverUrl />
+  </label>
+  <br>
+  <label>Song audioUrl:
+    <input #audioUrl />
+  </label>
+  <br>
+  <h1 style = "color: white">Add new song </h1>
+ <!-- <button class = "btn btn-warning" (click)="add()"> ADD</button>-->
+  <button class="button button_primary" (click)="add(title.value, author.value, coverUrl.value, audioUrl.value);
+                  title.value=''; author.value=''; coverUrl.value=''; audioUrl.value=''">
+    Add
+  </button>
+</div>

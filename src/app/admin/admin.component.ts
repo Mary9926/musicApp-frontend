@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
+import {SongService} from '../services/song.service';
+import {SongModel} from '../model/song.model';
 
 @Component({
   selector: 'app-admin',
@@ -9,7 +11,8 @@ import {UserService} from '../services/user.service';
 export class AdminComponent implements OnInit {
   board: string;
   errorMessage: string;
-  constructor(private userService: UserService) { }
+  songsList: SongModel[];
+  constructor(private userService: UserService, private songService: SongService) { }
 
   ngOnInit(): void {
     this.userService.getAdminPage().subscribe(
@@ -21,5 +24,16 @@ export class AdminComponent implements OnInit {
       }
     );
   }
+  add(title: string, author: string, coverUrl: string, audioUrl: string): void {
+  /*  title = title.trim();
+    author = author.trim();
+    coverUrl = coverUrl.trim();
+    audioUrl = audioUrl.trim();*/
+    this.songService.addSong({ title, author, coverUrl, audioUrl } as SongModel)
+      .subscribe(song => { this.songsList.push(song); }
+      );
+    window.location.reload();
+  }
+
 
 }
