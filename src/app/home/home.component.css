@@ -19,3 +19,11 @@
 .border-medium{
   border-width: 5px !important;
 }
+
+.fotoBackground {
+  background-image: url(../images/phones.png);
+  height: 100%;
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+}

@@ -1,25 +1,35 @@
-<h4 style = "color: white; padding: 2px; text-align: center"> Your Admin Account</h4>
-<div>
-  <label>Song title:
-    <input #title />
-  </label>
+<div class="foto">
+<div class=" row col-sm-6 textpalce addBlock" *ngIf="isLoggedIn; else loggedOut">
+  <h1 class="header" style = "color: #e0a800">Add new song </h1>
   <br>
-  <label>Song author:
-    <input #author />
-  </label>
-  <br>
-  <label>Song coverUrl:
-    <input #coverUrl />
-  </label>
-  <br>
-  <label>Song audioUrl:
-    <input #audioUrl />
-  </label>
-  <br>
-  <h1 style = "color: white">Add new song </h1>
- <!-- <button class = "btn btn-warning" (click)="add()"> ADD</button>-->
-  <button class="button button_primary" (click)="add(title.value, author.value, coverUrl.value, audioUrl.value);
+  <div>
+    <label style = "color: whitesmoke" >Song title:
+      <input class="form-group border border-medium border-warning"  style="margin-left: 30px;" #title />
+    </label>
+    <br>
+    <label style = "color: whitesmoke">Song author:
+      <input class="form-group border border-medium border-warning" style="margin-left: 20px;" #author />
+    </label>
+    <br>
+    <label style = "color: whitesmoke">Song coverUrl:
+      <input class="form-group border border-medium border-warning" #coverUrl />
+    </label>
+    <br>
+    <label style = "color: whitesmoke" >Song audioUrl:
+      <input class="form-group border border-medium border-warning" #audioUrl />
+    </label>
+    <br>
+    <button class="btn btn-warning buttonCute" (click)="add(title.value, author.value, coverUrl.value, audioUrl.value);
                   title.value=''; author.value=''; coverUrl.value=''; audioUrl.value=''">
-    Add
-  </button>
+      Add
+    </button>
+  </div>
+</div>
+
+<ng-template #loggedOut>
+  <div class="d-flex flex-column mt-4 align-items-center">
+    <div class="h2 p-2 text-center text-white">Please, login to listen music</div>
+    <a class="btn btn-warning" routerLink="../auth/login">Login</a>
+  </div>
+</ng-template>
 </div>

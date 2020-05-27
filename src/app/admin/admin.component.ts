@@ -12,6 +12,7 @@ export class AdminComponent implements OnInit {
   board: string;
   errorMessage: string;
   songsList: SongModel[];
+  isLoggedIn = true;
   constructor(private userService: UserService, private songService: SongService) { }
 
   ngOnInit(): void {
@@ -25,14 +26,9 @@ export class AdminComponent implements OnInit {
     );
   }
   add(title: string, author: string, coverUrl: string, audioUrl: string): void {
-  /*  title = title.trim();
-    author = author.trim();
-    coverUrl = coverUrl.trim();
-    audioUrl = audioUrl.trim();*/
     this.songService.addSong({ title, author, coverUrl, audioUrl } as SongModel)
       .subscribe(song => { this.songsList.push(song); }
       );
-    window.location.reload();
   }
 
 
