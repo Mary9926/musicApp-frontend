@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
+import { Track } from 'ngx-audio-player';
+import {PlaylistModel} from '../model/playlist.model';
+import {SongModel} from '../model/song.model';
 
 @Component({
   selector: 'app-user',
@@ -22,4 +25,5 @@ export class UserComponent implements OnInit {
       }
     );
   }
+
 }

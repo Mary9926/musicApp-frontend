@@ -26,7 +26,14 @@ export class SongService {
       catchError(this.handleError<SongModel>('addSong'))
     );
   }
-
+  deleteSong(song: SongModel | number): Observable<SongModel> {
+    const id = typeof song === 'number' ? song : song.id;
+    const url = `${this.songUrl}/${id}`;
+    return this.http.delete<SongModel>(url, httpOptions).pipe(
+      tap(_ => this.log(`deleted song id=${id}`)),
+      catchError(this.handleError<SongModel>('songDelete'))
+    );
+  }
 
 /**
  * Handle Http operation that failed.

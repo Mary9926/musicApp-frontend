@@ -1,0 +1,13 @@
+<div *ngIf="isLoggedIn; else loggedOut" style="background-color: whitesmoke;">
+  <div class="img-fluid img" style="background-image: url({{imageUrl}})"></div>
+  <mat-advanced-audio-player [playlist]="msaapPlaylist" [displayTitle]="msaapDisplayTitle"
+                             [displayPlaylist]="msaapDisplayPlayList" [pageSizeOptions]="msaapPageSizeOptions"
+                             [displayVolumeControls]="msaapDisplayVolumeControls" [expanded]="true"></mat-advanced-audio-player>
+</div>
+
+<ng-template #loggedOut>
+  <div class="d-flex flex-column pt-4 align-items-center">
+    <div class="h2 p-2 text-center text-white">Please, login to listen playlists</div>
+    <a class="btn btn-warning" routerLink="../../../auth/login">Login</a>
+  </div>
+</ng-template>

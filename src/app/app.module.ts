@@ -13,6 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
 import { SearchComponent } from './search/search.component';
 import {MatListModule} from '@angular/material';
+import { PlaylistComponent } from './playlist/playlist.component';
 
 const routes: Routes = [
   // basic routes
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'user', component: UserComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'auth/login', component: LoginComponent },
+  { path: 'user/playlist/:id', component: PlaylistComponent },
   { path: 'signup', component: RegisterComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
@@ -33,7 +35,8 @@ const routes: Routes = [
     RegisterComponent,
     UserComponent,
     AdminComponent,
-    SearchComponent
+    SearchComponent,
+    PlaylistComponent
   ],
   imports: [
     BrowserModule,

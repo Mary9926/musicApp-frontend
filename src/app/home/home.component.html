@@ -1,6 +1,6 @@
 <div class="fotoBackground">
 <div *ngIf="isLoggedIn; else loggedOut">
-  <div class="d-flex mt-4 justify-content-center list">
+  <div class="d-flex pt-4 justify-content-center list">
     <div class="form-inline md-form mb-4">
       <input class="form-control mr-sm-2 border border-medium border-warning" type="text"  placeholder="Search" aria-label="Search" (input)="search($event)">
     </div>
@@ -18,7 +18,7 @@
 </div>
 
 <ng-template #loggedOut>
-  <div class="d-flex flex-column mt-4 align-items-center">
+  <div class="d-flex flex-column pt-4 align-items-center">
     <div class="h2 p-2 text-center text-white">Please, login to listen music</div>
     <a class="btn btn-warning" routerLink="../auth/login">Login</a>
   </div>

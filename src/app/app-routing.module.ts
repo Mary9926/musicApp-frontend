@@ -5,6 +5,7 @@ import {UserComponent} from './user/user.component';
 import {AdminComponent} from './admin/admin.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
+import {PlaylistComponent} from './playlist/playlist.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'auth/login',
     component: LoginComponent
+  },
+  {
+    path: 'user/playlist/:id',
+    component: PlaylistComponent
   },
   {
     path: 'signup',

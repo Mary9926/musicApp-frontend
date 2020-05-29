@@ -15,7 +15,7 @@
       <li *ngIf="!authority" class="nav-item">
         <a class="nav-link btn nav-link-white" routerLink="auth/login">Login</a>
       </li>
-      <div *ngIf="isLoggedIn;">
+      <div *ngIf="isLoggedIn;" class="d-flex justify-content-center">
         <li *ngIf="authority" class="nav-item">
           <a class="btn btn-warning" (click)="logout()">Logout</a>
         </li>
