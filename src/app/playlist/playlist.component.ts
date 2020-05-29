@@ -39,7 +39,7 @@ export class PlaylistComponent implements OnInit {
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
-    if (this.info.token){
+    if (this.info.token && !this.info.authorities.includes('ROLE_ADMIN')){
       this.isLoggedIn = true;
       this.playlistId = Number(this.route.snapshot.paramMap.get('id'));
       this.setTracks();
