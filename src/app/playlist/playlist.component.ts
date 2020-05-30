@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {PlaylistModel} from '../model/playlist.model';
-import {SongModel} from '../model/song.model';
 import {UserService} from '../services/user.service';
 import {Track} from 'ngx-audio-player';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -13,7 +12,9 @@ import {TokenStorageService} from '../auth/token-storage.service';
 })
 export class PlaylistComponent implements OnInit {
   info: any;
+  playlist: PlaylistModel;
   isLoggedIn = false;
+  isNotEmpty = true;
   board: string;
   playlistId: any;
   imageUrl: string;
@@ -42,20 +43,27 @@ export class PlaylistComponent implements OnInit {
     if (this.info.token && !this.info.authorities.includes('ROLE_ADMIN')){
       this.isLoggedIn = true;
       this.playlistId = Number(this.route.snapshot.paramMap.get('id'));
-      this.setTracks();
+      this.getPlaylist();
     }
 
   }
   getPlaylist(){
-    return new PlaylistModel('Party', 'https://images.pexels.com/photos/801863/pexels-photo-801863.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' , [
-      new SongModel('Shallow', 'Lady Gaga', 'https://przeambitni.pl/wp-content/uploads/2017/05/margaret-1.jpg', 'assets/songs/Shallow.mp3'),
-      new SongModel('In The End', 'Linkin Park', 'https://przeambitni.pl/wp-content/uploads/2017/05/margaret-1.jpg', 'assets/songs/End.mp3')
-    ]);
+    this.userService.getPlaylistById(this.info.username, this.playlistId).subscribe(
+      data => {
+        this.playlist = data;
+        this.setTracks();
+      },
+      error => {
+        console.log(`${error.status}: ${JSON.parse(error.error).message}`);
+      }
+    );
   }
   setTracks(){
-    const songs = this.getPlaylist().songs;
-    this.imageUrl = this.getPlaylist().image;
-    console.log(this.playlistId);
+    const songs = this.playlist.songs;
+    if (songs.length <= 0) {
+      this.isNotEmpty = false;
+    }
+    this.imageUrl = this.playlist.image;
     for(let i = 0; i < songs.length; i++) {
       this.msaapPlaylist.push({
         title: songs[i].author + ' - ' + songs[i].title,

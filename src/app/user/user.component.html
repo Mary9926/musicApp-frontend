@@ -1,10 +1,22 @@
 <div class="fotoBackground">
   <div *ngIf="isLoggedIn; else loggedOut">
+    <form class="p-5 col-md-6">
+      <div class="form-group">
+        <label class="text-white" for="name">Playlist name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name" #name>
+      </div>
+      <div class="form-group">
+        <label class="text-white" for="imageUrl">Playlist image</label>
+        <input type="text" class="form-control" id="imageUrl" placeholder="Image url" #imageUrl>
+      </div>
+      <button type="submit" class="btn btn-warning" (click)="add(name.value, imageUrl.value)">Create</button>
+    </form>
     <div class="card-group justify-content-center">
-      <div *ngFor="let playlist of playlists" [routerLink]="['/user/playlist', playlist.id]" class="card card-hover m-2 border-0" style="min-width: 400px; max-width: 600px;">
-        <div class="img-fluid img" style="background-image: url({{playlist.image}})"></div>
-        <div class="card-body">
-          <h5 class="card-title">{{playlist.name}}</h5>
+      <div *ngFor="let playlist of playlists" class="card card-hover m-2 border-0" style="min-width: 400px; max-width: 600px;">
+        <button class="btn btn-danger btn-absolute" (click)="delete(playlist)">X</button>
+        <div class="img-fluid img" [routerLink]="['/user/playlist', playlist.id]" style="background-image: url({{playlist.image}})"></div>
+        <div class="card-body" [routerLink]="['/user/playlist', playlist.id]">
+          <h5 class="card-title">{{playlist.name}} - {{playlist.songs.length}} songs</h5>
         </div>
       </div>
     </div>

@@ -27,3 +27,13 @@
   background-repeat: repeat;
   background-size: cover;
 }
+
+.btn-absolute{
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: auto;
+  border-radius: 0;
+  text-align: center;
+}

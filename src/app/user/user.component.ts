@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
 import {PlaylistModel} from '../model/playlist.model';
-import {SongModel} from '../model/song.model';
 import {TokenStorageService} from '../auth/token-storage.service';
+import {SongModel} from '../model/song.model';
 
 @Component({
   selector: 'app-user',
@@ -27,6 +27,7 @@ export class UserComponent implements OnInit {
         this.errorMessage = `${error.status}: ${JSON.parse(error.error).message}`;
       }
     );
+
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
@@ -34,20 +35,29 @@ export class UserComponent implements OnInit {
     };
     if (this.info.token && !this.info.authorities.includes('ROLE_ADMIN')){
       this.isLoggedIn = true;
-      this.playlists = this.getPlaylists();
+      this.getPlaylists();
     }
   }
   getPlaylists(){
-    return [
-      new PlaylistModel('Party', 'https://images.pexels.com/photos/801863/pexels-photo-801863.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' ,
-[new SongModel('Shallow', 'Lady Gaga', 'https://przeambitni.pl/wp-content/uploads/2017/05/margaret-1.jpg', 'assets/songs/Shallow.mp3'),
-        new SongModel('In The End', 'Linkin Park', 'https://przeambitni.pl/wp-content/uploads/2017/05/margaret-1.jpg', 'assets/songs/End.mp3')
-      ]),
-      new PlaylistModel('Party', 'https://images.pexels.com/photos/801863/pexels-photo-801863.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' ,
-        [new SongModel('Shallow', 'Lady Gaga', 'https://przeambitni.pl/wp-content/uploads/2017/05/margaret-1.jpg', 'assets/songs/Shallow.mp3'),
-          new SongModel('In The End', 'Linkin Park', 'https://przeambitni.pl/wp-content/uploads/2017/05/margaret-1.jpg', 'assets/songs/End.mp3')
-        ])
-    ];
+    this.userService.getUserPlaylists(this.info.username).subscribe(
+      data => {
+        this.playlists = data;
+      },
+      error => {
+        console.log(`${error.status}: ${JSON.parse(error.error).message}`);
+      }
+    );
+  }
+  add(name: string, image: string): void {
+    this.userService.addPlaylist({ name, image } as PlaylistModel, this.info.username)
+      .subscribe(playlist => { this.getPlaylists(); }
+      );
+  }
+  delete(playlist: PlaylistModel){
+    if (confirm('Are you sure to delete ' + playlist.name)) {
+      this.playlists = this.playlists.filter(p => p !== playlist);
+      this.userService.deletePlaylist(playlist, this.info.username).subscribe();
+    }
   }
 
 }

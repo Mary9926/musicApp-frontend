@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   songs: SongModel[];
   songsFilter: SongModel[];
   isLoggedIn = false;
+  isUser = false;
   msbapDisplayTitle = true;
   msbapDisplayVolumeControls = true;
   constructor(private token: TokenStorageService, private songService: SongService) { }
@@ -26,6 +27,9 @@ export class HomeComponent implements OnInit {
     if (this.info.token){
       this.isLoggedIn = true;
       this.getSongs();
+    }
+    if (!this.info.authorities.includes('ROLE_ADMIN')){
+      this.isUser = true;
     }
   }
   getSongs(){

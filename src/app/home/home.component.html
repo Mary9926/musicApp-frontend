@@ -8,6 +8,7 @@
 
   <div class="card-group justify-content-center">
     <div *ngFor="let song of songsFilter" class="card m-2 border-0" style="min-width: 400px; max-width: 600px;">
+      <button *ngIf="isUser" class="btn btn-outline-warning btn-absolute">Add</button>
       <div style="background-color: whitesmoke;">
         <div class="img-fluid img" style="background-image: url({{song.coverUrl}})"></div>
         <mat-basic-audio-player [audioUrl]="song.audioUrl" [title]="song.title + ' - ' + song.author" [autoPlay]="false" muted="muted"

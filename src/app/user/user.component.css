@@ -19,3 +19,13 @@ p {
   cursor: pointer;
   transform: scale(1.02);
 }
+
+.btn-absolute{
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  border-radius: 0;
+  text-align: center;
+}
