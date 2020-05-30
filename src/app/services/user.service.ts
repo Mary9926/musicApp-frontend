@@ -43,12 +43,28 @@ export class UserService {
     );
   }
 
-  deletePlaylist(song: PlaylistModel | number, username: string): Observable<PlaylistModel> {
-    const id = typeof song === 'number' ? song : song.id;
+  deletePlaylist(playlist: PlaylistModel | number, username: string): Observable<PlaylistModel> {
+    const id = typeof playlist === 'number' ? playlist : playlist.id;
     const url = `${this.url}${username}/playlists/${id}`;
     return this.http.delete<PlaylistModel>(url, httpOptions).pipe(
       tap(_ => this.log(`deleted playlist`)),
       catchError(this.handleError<PlaylistModel>('playlistDeleted'))
+    );
+  }
+
+  addSongToPlaylist(songId: number, playlist: PlaylistModel, username: string): Observable<PlaylistModel> {
+    return this.http.post<PlaylistModel>(this.url + username + '/playlists/' + playlist.id + '/songs/' + songId, httpOptions).pipe(
+      tap((playlistAdded: PlaylistModel) => this.log(`added song to playlist =${playlistAdded}`)),
+      catchError(this.handleError<PlaylistModel>('song not addded'))
+    );
+  }
+
+  deleteSongFromPlaylist(song: SongModel | number, playlistId: number, username: string): Observable<SongModel> {
+    const songId = typeof song === 'number' ? song : song.id;
+    const url = `${this.url}${username}/playlists/${playlistId}/songs/${songId}`;
+    return this.http.delete<SongModel>(url, httpOptions).pipe(
+      tap(_ => this.log(`deleted song`)),
+      catchError(this.handleError<SongModel>('songDeleted'))
     );
   }
 

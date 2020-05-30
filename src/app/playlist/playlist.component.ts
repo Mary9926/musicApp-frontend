@@ -4,6 +4,7 @@ import {UserService} from '../services/user.service';
 import {Track} from 'ngx-audio-player';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TokenStorageService} from '../auth/token-storage.service';
+import {SongModel} from '../model/song.model';
 
 @Component({
   selector: 'app-playlist',
@@ -15,6 +16,7 @@ export class PlaylistComponent implements OnInit {
   playlist: PlaylistModel;
   isLoggedIn = false;
   isNotEmpty = true;
+  songsLoaded = false;
   board: string;
   playlistId: any;
   imageUrl: string;
@@ -68,6 +70,14 @@ export class PlaylistComponent implements OnInit {
       this.msaapPlaylist.push({
         title: songs[i].author + ' - ' + songs[i].title,
         link: songs[i].audioUrl
+      });
+    }
+    this.songsLoaded = true;
+  }
+  deleteSongFromPlaylist(song: SongModel){
+    if (confirm('Are you sure to delete ' + song.title)) {
+      this.userService.deleteSongFromPlaylist(song, this.playlist.id, this.info.username ).subscribe( () => {
+        window.location.reload();
       });
     }
   }

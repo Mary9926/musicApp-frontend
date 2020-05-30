@@ -8,7 +8,30 @@
 
   <div class="card-group justify-content-center">
     <div *ngFor="let song of songsFilter" class="card m-2 border-0" style="min-width: 400px; max-width: 600px;">
-      <button *ngIf="isUser" class="btn btn-outline-warning btn-absolute">Add</button>
+      <!-- add song window -->
+      <div class="modal fade" id="modal{{song.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Choose playlist to add song</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <ul class="list-group">
+                <li *ngFor="let playlist of playlists" class="list-group-item list-playlist" (click)="addSongToPlaylist(song.id, playlist)">{{playlist.name}}</li>
+              </ul>
+            </div>
+            <h5 class="text-success ml-2">{{message}}</h5>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button *ngIf="isUser" class="btn btn-outline-warning btn-absolute" data-toggle="modal" [attr.data-target]="'#modal'+ song.id">Add</button>
+      <!-- audio player -->
       <div style="background-color: whitesmoke;">
         <div class="img-fluid img" style="background-image: url({{song.coverUrl}})"></div>
         <mat-basic-audio-player [audioUrl]="song.audioUrl" [title]="song.title + ' - ' + song.author" [autoPlay]="false" muted="muted"

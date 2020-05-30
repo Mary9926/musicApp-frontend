@@ -1,9 +1,27 @@
 <div *ngIf="isLoggedIn; else loggedOut">
   <div *ngIf="isNotEmpty; else emptyPlaylist" style="background-color: whitesmoke;">
     <div class="img-fluid img" style="background-image: url({{imageUrl}})"></div>
-    <mat-advanced-audio-player [playlist]="msaapPlaylist" [displayTitle]="msaapDisplayTitle"
+    <mat-advanced-audio-player *ngIf="songsLoaded" [playlist]="msaapPlaylist" [displayTitle]="msaapDisplayTitle"
                                [displayPlaylist]="msaapDisplayPlayList" [pageSizeOptions]="msaapPageSizeOptions"
                                [displayVolumeControls]="msaapDisplayVolumeControls" [expanded]="true"></mat-advanced-audio-player>
+    <table *ngIf="songsLoaded" class="table m-0">
+      <thead style="background-color: #b7247d; color: whitesmoke;">
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Artist</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody style="background-color: whitesmoke">
+      <tr *ngFor="let song of playlist.songs">
+        <td>{{song.title}}</td>
+        <td>{{song.author}}</td>
+        <td>
+          <button class="btn btn-warning" (click)="deleteSongFromPlaylist(song)">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
   <ng-template #emptyPlaylist>
     <div class="d-flex flex-column pt-4 align-items-center">
